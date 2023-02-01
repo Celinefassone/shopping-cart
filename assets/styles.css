@@ -19,6 +19,8 @@
 }
 
 .product {
+  cursor: pointer;
+  border: solid 20px white;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -27,7 +29,6 @@
   background-color: rgb(140, 194, 251);
   color: white;
   flex-direction: column;
-  margin: 20px;
 }
 
 .image {
@@ -56,9 +57,7 @@
   font-size: 15px;
 }
 
-.selected {
-  border: solid;
-  border-width: 20px;
+.selected .product {
   border-color: darkslateblue;
 }
 
