@@ -1,25 +1,28 @@
-const data = [
-  {
-    title: "Leather Jacket",
-    description: "//",
-    image_url: "/images/jacket.jpg",
-  },
-  {
-    title: "Blue Beanie",
-    description: "//",
-    image_url: "/images/beanie.webp",
-  },
-  {
-    title: "Stussy Black Hoodie",
-    description: "€125.00",
-    image_url: "/images/hoodie.webp",
-  },
-  {
-    title: "Black Parachute Pants",
-    description: "//",
-    image_url: "/images/pants.avif",
-  },
-];
+const productsData = {
+  count: 0,
+  products: [
+    {
+      title: "Leather Jacket",
+      description: "//",
+      image_url: "/images/jacket.jpg",
+    },
+    {
+      title: "Blue Beanie",
+      description: "//",
+      image_url: "/images/beanie.webp",
+    },
+    {
+      title: "Stussy Black Hoodie",
+      description: "€125.00",
+      image_url: "/images/hoodie.webp",
+    },
+    {
+      title: "Black Parachute Pants",
+      description: "//",
+      image_url: "/images/pants.avif",
+    },
+  ],
+};
 
 const renderHtml = function (product) {
   const element = document.createElement("div");
@@ -32,37 +35,34 @@ const renderHtml = function (product) {
     <p class="product-description">${product.description}</p>
   </div>`;
 
-  element.addEventListener("click", function () {
-    if (element.classList.contains("selected")) {
-      element.classList.remove("selected");
-    } else {
-      element.classList.add("selected");
-    }
-  });
-
   return element;
 };
 
-document.addEventListener("DOMContentLoaded", function () {
-  const products = document.querySelector("#products");
-
-  for (let i = 0; i < data.length; i++) {
-    products.appendChild(renderHtml(data[i]));
-  }
-});
-
-if (myCounter) {
-  element.addEventListener("click", function () {
-    if (element.classList.contains("selected")) {
-      count--;
-      element.classList.remove("selected");
+const addEvents = function (el, counterElement) {
+  el.addEventListener("click", function () {
+    if (el.classList.contains("selected")) {
+      el.classList.remove("selected");
+      productsData.count--;
     } else {
-      count++;
-      element.classList.add("selected");
+      productsData.count++;
+      el.classList.add("selected");
     }
-    myCounter.textContent = count;
+
+    counterElement.innerHTML = productsData.count;
   });
-}
+};
+
+document.addEventListener("DOMContentLoaded", function () {
+  const productsElement = document.querySelector("#products");
+  const counterElement = document.querySelector("#counter");
+  counterElement.innerHTML = productsData.count;
+
+  productsData.products.forEach(function (product) {
+    const renderedElement = renderHtml(product);
+    productsElement.appendChild(renderedElement);
+    addEvents(renderedElement, counterElement);
+  });
+});
 
 /*
 this event makes the function select all the products and the for loop starts from position 0 in the
